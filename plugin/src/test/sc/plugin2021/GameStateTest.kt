@@ -28,21 +28,19 @@ class GameStateTest: StringSpec({
         state.getPointsForPlayer(Team.TWO) shouldBe 0
     }
     "GameStates know currently active Color" {
-        var colorIter = Color.RED
-        val state = GameState(startColor = colorIter)
-        
+        val state = GameState()
+
         state.orderedColors.size shouldBe Constants.COLORS
-        for (x in 0 until Constants.COLORS) {
-            state.currentColor shouldBe colorIter
+        for (color in Color.values()) {
+            state.currentColor shouldBe color
             state.turn++
-            colorIter = colorIter.next
         }
         
-        state.currentColor shouldBe Color.RED
+        state.currentColor shouldBe Color.BLUE
         state.turn++
-        state.currentColor shouldBe Color.GREEN
-        state.turn += 2
         state.currentColor shouldBe Color.YELLOW
+        state.turn += 2
+        state.currentColor shouldBe Color.GREEN
     }
     "Pieces can only be placed once" {
         val state = GameState(startPiece = PieceShape.PENTO_I)
@@ -72,17 +70,6 @@ class GameStateTest: StringSpec({
         transformed.board.isEmpty()
     }
     "GameStates advance accordingly" {
-        forAll(
-                row(2, 1, Color.RED),
-                row(7, 2, Color.GREEN),
-                row(8, 3, Color.BLUE)
-        ) { turn, round, color ->
-            val state = GameState(startTurn = turn)
-            state.turn shouldBe turn
-            state.round shouldBe round
-            state.currentColor shouldBe color
-        }
-    
         GameState().run {
             turn shouldBe 0
             round shouldBe 1

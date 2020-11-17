@@ -28,7 +28,7 @@ class ConverterTest: StringSpec({
         board shouldSerializeTo boardXML.trimIndent()
         
         state shouldSerializeTo """
-            <state currentColorIndex="0" turn="0" round="1" startPiece="PENTO_L">
+            <state turn="0" round="1" startPiece="PENTO_L">
               <startTeam class="team">ONE</startTeam>$boardXML
               <blueShapes class="linked-hash-set">
                 <shape>MONO</shape>
@@ -123,19 +123,12 @@ class ConverterTest: StringSpec({
                 <shape>PENTO_Y</shape>
               </greenShapes>
               <lastMoveMono class="linked-hash-map"/>
-              <orderedColors>
-                <color>BLUE</color>
-                <color>YELLOW</color>
-                <color>RED</color>
-                <color>GREEN</color>
-              </orderedColors>
               <first displayName="">
                 <color class="team">ONE</color>
               </first>
               <second displayName="">
                 <color class="team">TWO</color>
               </second>
-              <startColor>BLUE</startColor>
             </state>""".trimIndent()
     }
 })

@@ -7,6 +7,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
+import sc.api.plugins.exceptions.GameLogicException
 import sc.helpers.xStream
 import sc.plugin2021.util.Constants
 import sc.plugin2021.util.GameRuleLogic
@@ -53,7 +54,7 @@ class GameTest: FreeSpec({
                 game.onAction(state.currentPlayer, SkipMove(state.currentColor))
             }
         }
-        shouldThrow<java.lang.IndexOutOfBoundsException> {
+        shouldThrow<GameLogicException> {
             game.onAction(state.currentPlayer, SkipMove(state.currentColor))
         }
     
